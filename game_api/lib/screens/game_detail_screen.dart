@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/game.dart';
+import '../widgets/network_image_widget.dart';
 
 class GameDetailScreen extends StatelessWidget {
   final Game game;
@@ -41,12 +42,10 @@ class GameDetailScreen extends StatelessWidget {
                 fit: StackFit.expand,
                 children: [
                   game.imagenUrl != null && game.imagenUrl!.isNotEmpty
-                      ? Image.network(
-                          game.imagenUrl!,
+                      ? NetworkImageWidget(
+                          imageUrl: game.imagenUrl!,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return _buildPlaceholderImage();
-                          },
+                          errorWidget: _buildPlaceholderImage(),
                         )
                       : _buildPlaceholderImage(),
                   Container(

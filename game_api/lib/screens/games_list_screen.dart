@@ -3,6 +3,7 @@ import '../models/game.dart';
 import '../services/game_service.dart';
 import 'game_form_screen.dart';
 import 'game_detail_screen.dart';
+import '../widgets/network_image_widget.dart';
 
 class GamesListScreen extends StatefulWidget {
   const GamesListScreen({super.key});
@@ -256,14 +257,12 @@ class _GamesListScreenState extends State<GamesListScreen> {
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: game.imagenUrl != null && game.imagenUrl!.isNotEmpty
-                    ? Image.network(
-                        game.imagenUrl!,
+                    ? NetworkImageWidget(
+                        imageUrl: game.imagenUrl!,
                         width: 80,
                         height: 80,
                         fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return _buildPlaceholderImage();
-                        },
+                        errorWidget: _buildPlaceholderImage(),
                       )
                     : _buildPlaceholderImage(),
               ),
