@@ -36,8 +36,32 @@ class _GamesListScreenState extends State<GamesListScreen> {
         _isLoading = false;
       });
     } catch (e) {
+      String errorMsg = e.toString();
+      
+      if (errorMsg.contains('Failed host lookup') || errorMsg.contains('SocketException')) {
+        errorMsg = 'Error de conexión: No se pudo resolver el hostname.\n\n'
+            'Posibles causas:\n'
+            '• El emulador no tiene acceso a internet\n'
+            '• Problema de DNS en el emulador\n'
+            '• El servidor no está disponible\n\n'
+            'Error técnico: $e';
+      } else if (errorMsg.contains('Timeout')) {
+        errorMsg = 'Timeout: El servidor no respondió a tiempo.\n\n'
+            'Verifica que:\n'
+            '• El servidor esté funcionando\n'
+            '• Tu conexión a internet esté activa\n\n'
+            'Error técnico: $e';
+      } else if (errorMsg.contains('ClientException')) {
+        errorMsg = 'Error de conexión de red.\n\n'
+            'Verifica:\n'
+            '• Tu conexión a internet\n'
+            '• Que el emulador tenga permisos de red\n'
+            '• Que el servidor esté accesible\n\n'
+            'Error técnico: $e';
+      }
+      
       setState(() {
-        _errorMessage = e.toString();
+        _errorMessage = errorMsg;
         _isLoading = false;
       });
     }
@@ -259,10 +283,11 @@ class _GamesListScreenState extends State<GamesListScreen> {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 6),
-                    Row(
+                    Wrap(
+                      spacing: 6,
+                      runSpacing: 6,
                       children: [
                         _buildChip(game.genero, const Color(0xFF6366F1)),
-                        const SizedBox(width: 6),
                         _buildChip(game.plataforma, const Color(0xFF8B5CF6)),
                       ],
                     ),
@@ -296,11 +321,14 @@ class _GamesListScreenState extends State<GamesListScreen> {
                 itemBuilder: (context) => [
                   PopupMenuItem(
                     value: 'edit',
-                    child: const Row(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.edit, size: 18, color: Color(0xFF6366F1)),
-                        SizedBox(width: 12),
-                        Text('Editar', style: TextStyle(color: Colors.white)),
+                        const Icon(Icons.edit, size: 18, color: Color(0xFF6366F1)),
+                        const SizedBox(width: 12),
+                        const Flexible(
+                          child: Text('Editar', style: TextStyle(color: Colors.white)),
+                        ),
                       ],
                     ),
                     onTap: () {
@@ -322,11 +350,14 @@ class _GamesListScreenState extends State<GamesListScreen> {
                   ),
                   PopupMenuItem(
                     value: 'delete',
-                    child: const Row(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.delete, size: 18, color: Color(0xFFEF4444)),
-                        SizedBox(width: 12),
-                        Text('Eliminar', style: TextStyle(color: Color(0xFFEF4444))),
+                        const Icon(Icons.delete, size: 18, color: Color(0xFFEF4444)),
+                        const SizedBox(width: 12),
+                        const Flexible(
+                          child: Text('Eliminar', style: TextStyle(color: Color(0xFFEF4444))),
+                        ),
                       ],
                     ),
                     onTap: () {

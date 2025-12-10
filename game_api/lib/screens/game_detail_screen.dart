@@ -71,10 +71,11 @@ class GameDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
+                  Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
                     children: [
                       _buildBadge(game.genero, Icons.category, const Color(0xFF6366F1)),
-                      const SizedBox(width: 12),
                       _buildBadge(game.plataforma, Icons.computer, const Color(0xFF8B5CF6)),
                     ],
                   ),
@@ -174,12 +175,16 @@ class GameDetailScreen extends StatelessWidget {
         children: [
           Icon(icon, size: 16, color: color),
           const SizedBox(width: 6),
-          Text(
-            label,
-            style: TextStyle(
-              color: color,
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
+          Flexible(
+            child: Text(
+              label,
+              style: TextStyle(
+                color: color,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
           ),
         ],
@@ -241,11 +246,14 @@ class GameDetailScreen extends StatelessWidget {
       children: [
         Icon(icon, size: 14, color: Colors.white60),
         const SizedBox(width: 8),
-        Text(
-          text,
-          style: const TextStyle(
-            color: Colors.white60,
-            fontSize: 12,
+        Flexible(
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: Colors.white60,
+              fontSize: 12,
+            ),
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],
