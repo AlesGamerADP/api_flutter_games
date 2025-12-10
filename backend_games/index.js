@@ -9,12 +9,10 @@ const gamesRoutes = require('./routes/games');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Ruta proxy para imágenes (soluciona problemas de CORS en web)
 app.get('/api/proxy-image', async (req, res) => {
   try {
     const imageUrl = req.query.url;
@@ -23,7 +21,6 @@ app.get('/api/proxy-image', async (req, res) => {
       return res.status(400).json({ error: 'URL de imagen requerida' });
     }
 
-    // Validar que sea una URL válida
     let url;
     try {
       url = new URL(imageUrl);
@@ -31,18 +28,14 @@ app.get('/api/proxy-image', async (req, res) => {
       return res.status(400).json({ error: 'URL inválida' });
     }
 
-    // Configurar headers CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
     res.setHeader('Cache-Control', 'public, max-age=31536000');
 
-    // Determinar si usar http o https
     const client = url.protocol === 'https:' ? https : http;
 
-    // Hacer la petición a la imagen
     client.get(imageUrl, (imageRes) => {
-      // Copiar headers importantes
       if (imageRes.headers['content-type']) {
         res.setHeader('Content-Type', imageRes.headers['content-type']);
       }
@@ -50,7 +43,6 @@ app.get('/api/proxy-image', async (req, res) => {
         res.setHeader('Content-Length', imageRes.headers['content-length']);
       }
 
-      // Pipe la respuesta
       imageRes.pipe(res);
     }).on('error', (err) => {
       console.error('Error al obtener imagen:', err);
@@ -62,10 +54,8 @@ app.get('/api/proxy-image', async (req, res) => {
   }
 });
 
-// Rutas
 app.use('/api/games', gamesRoutes);
 
-// Ruta de prueba
 app.get('/', (req, res) => {
   res.json({ 
     message: 'API de Juegos funcionando correctamente',
@@ -79,7 +69,6 @@ app.get('/', (req, res) => {
   });
 });
 
-// Manejo de errores
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ error: 'Error interno del servidor' });
