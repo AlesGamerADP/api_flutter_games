@@ -21,7 +21,6 @@ class Game {
     this.updatedAt,
   });
 
-  // Convertir de JSON a Game
   factory Game.fromJson(Map<String, dynamic> json) {
     return Game(
       id: json['id'],
@@ -40,7 +39,6 @@ class Game {
     );
   }
 
-  // Convertir de Game a JSON
   Map<String, dynamic> toJson() {
     return {
       if (id != null) 'id': id,
@@ -53,7 +51,6 @@ class Game {
     };
   }
 
-  // Crear una copia del juego con campos modificados
   Game copyWith({
     int? id,
     String? nombre,

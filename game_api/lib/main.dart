@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         brightness: Brightness.dark,
         colorScheme: const ColorScheme.dark(
-          primary: Color(0xFF6366F1), // Indigo moderno
-          secondary: Color(0xFF8B5CF6), // Púrpura suave
+          primary: Color(0xFF6366F1),
+          secondary: Color(0xFF8B5CF6),
           surface: Color(0xFF1F2937),
           background: Color(0xFF111827),
           error: Color(0xFFEF4444),

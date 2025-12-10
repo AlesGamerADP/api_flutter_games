@@ -71,7 +71,6 @@ class GameDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Badges
                   Row(
                     children: [
                       _buildBadge(game.genero, Icons.category, const Color(0xFF6366F1)),
@@ -80,7 +79,6 @@ class GameDetailScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 24),
-                  // Año de lanzamiento
                   _buildInfoCard(
                     icon: Icons.calendar_today,
                     iconColor: const Color(0xFFEC4899),
@@ -88,7 +86,6 @@ class GameDetailScreen extends StatelessWidget {
                     value: '${game.anioLanzamiento}',
                   ),
                   const SizedBox(height: 16),
-                  // Descripción
                   Card(
                     child: Padding(
                       padding: const EdgeInsets.all(16),

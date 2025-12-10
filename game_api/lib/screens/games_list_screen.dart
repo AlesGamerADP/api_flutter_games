@@ -229,7 +229,6 @@ class _GamesListScreenState extends State<GamesListScreen> {
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              // Imagen del juego
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: game.imagenUrl != null && game.imagenUrl!.isNotEmpty
@@ -245,7 +244,6 @@ class _GamesListScreenState extends State<GamesListScreen> {
                     : _buildPlaceholderImage(),
               ),
               const SizedBox(width: 12),
-              // Información del juego
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -289,7 +287,6 @@ class _GamesListScreenState extends State<GamesListScreen> {
                   ],
                 ),
               ),
-              // Menú de opciones
               PopupMenuButton(
                 icon: Icon(Icons.more_vert, color: Colors.grey[400]),
                 color: const Color(0xFF1F2937),

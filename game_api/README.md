@@ -54,27 +54,15 @@ Este comando lee el archivo pubspec.yaml e instala todas las dependencias listad
 
 ## Configuración
 
-Antes de ejecutar la aplicación, debes configurar la URL de la API en el archivo `lib/config/api_config.dart`.
-
-Abre el archivo y modifica la constante `baseUrl` según tu entorno:
+La aplicación está configurada para usar la API desplegada en Vercel. La URL de la API se encuentra en `lib/config/api_config.dart`:
 
 ```dart
-static const String baseUrl = 'http://localhost:3000/api/games';
+static const String baseUrl = 'https://api-flutter-games.vercel.app/api/games';
 ```
 
-Configuraciones según el entorno:
+Si necesitas cambiar la URL de la API (por ejemplo, para usar un servidor local), modifica la constante `baseUrl` en el archivo `lib/config/api_config.dart`.
 
-- Android Emulador: `http://10.0.2.2:3000/api/games`
-  - El emulador de Android usa 10.0.2.2 para referirse a localhost de la máquina host
-
-- iOS Simulador: `http://localhost:3000/api/games`
-  - El simulador de iOS puede acceder directamente a localhost
-
-- Dispositivo Físico: `http://TU_IP_LOCAL:3000/api/games`
-  - Reemplaza TU_IP_LOCAL con la dirección IP local de tu computadora
-  - Para encontrar tu IP local:
-    - Windows: Ejecuta `ipconfig` en la terminal y busca "IPv4 Address"
-    - Mac/Linux: Ejecuta `ifconfig` o `ip addr` y busca la dirección IP de tu interfaz de red
+Nota: La aplicación funciona con la API desplegada sin necesidad de configuración adicional. Solo necesitas conexión a internet para que la aplicación se comunique con el servidor.
 
 ## Ejecutar la Aplicación
 

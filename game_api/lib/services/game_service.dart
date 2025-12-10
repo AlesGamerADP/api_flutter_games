@@ -6,7 +6,6 @@ import '../config/api_config.dart';
 class GameService {
   static const String baseUrl = ApiConfig.baseUrl;
 
-  // Obtener todos los juegos
   Future<List<Game>> getGames() async {
     try {
       final response = await http.get(Uri.parse(baseUrl));
@@ -22,7 +21,6 @@ class GameService {
     }
   }
 
-  // Obtener un juego por ID
   Future<Game> getGameById(int id) async {
     try {
       final response = await http.get(Uri.parse('$baseUrl/$id'));
@@ -37,7 +35,6 @@ class GameService {
     }
   }
 
-  // Crear un nuevo juego
   Future<Game> createGame(Game game) async {
     try {
       final response = await http.post(
@@ -58,7 +55,6 @@ class GameService {
     }
   }
 
-  // Actualizar un juego
   Future<Game> updateGame(int id, Game game) async {
     try {
       final response = await http.put(
@@ -79,7 +75,6 @@ class GameService {
     }
   }
 
-  // Eliminar un juego
   Future<void> deleteGame(int id) async {
     try {
       final response = await http.delete(Uri.parse('$baseUrl/$id'));
